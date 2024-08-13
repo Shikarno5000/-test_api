@@ -6,6 +6,7 @@ services:
   laravel:
     restart: unless-stopped
     container_name: laravelapp
+    image: api:latest
     build:
       context: ../
       dockerfile: ./deploy/Dockerfile
