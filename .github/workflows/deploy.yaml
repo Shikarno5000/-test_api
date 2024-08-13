@@ -23,7 +23,7 @@ jobs:
       - run: chmod 600 "$HOME/.ssh/key"
       
       - name: Build Docker image
-        run: docker build -t  api:latest .
+        run: docker build -t  api:latest . -f ./deploy/Dockerfile 
 
       - name: Save Docker image as tar file
         run: |
