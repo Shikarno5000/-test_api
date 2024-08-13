@@ -7,9 +7,9 @@ services:
     restart: unless-stopped
     container_name: laravelapp
     image: api:latest
-    build:
-      context: ../
-      dockerfile: ./deploy/Dockerfile
+    # build:
+    #   context: ../
+    #   dockerfile: ./deploy/Dockerfile
     # При необходимости выделите столько томов, сколько нужно.
     volumes:
       - ../storage/app:/var/www/html/storage/app
