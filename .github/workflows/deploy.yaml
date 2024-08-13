@@ -53,8 +53,8 @@ jobs:
           username: root
           port: 22
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: ./ap/docker-compose.yaml
-          target: .
+          source: docker-compose.yaml
+          target: ./api
       
       - name: Deploy Docker conitainers using Docker Compose on remote server
         run: |
