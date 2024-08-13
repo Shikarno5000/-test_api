@@ -54,12 +54,12 @@ jobs:
           port: 22
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: ./deploy/docker-compose.yaml
-          target: ./api
+          target: .
       
       - name: Deploy Docker containers using Docker Compose on remote server
         run: |
           ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no root@5.35.84.206 << 'ENDSSH'
-          docker compose -f ~/api/deploy/docker-compose.yaml up -d
+          docker compose -f ~/deploy/docker-compose.yaml up -d
           ENDSSH
               
 
