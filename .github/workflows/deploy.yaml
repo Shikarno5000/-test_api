@@ -22,29 +22,29 @@ jobs:
       - run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
       
-      - name: Build Docker image
-        run: docker build -t  api:latest . 
+      # - name: Build Docker image
+      #   run: docker build -t  api:latest . 
 
-      - name: Save Docker image as tar file
-        run: |
-          docker save -o  api.tar  api:latest
-          chmod 664  api.tar
+      # - name: Save Docker image as tar file
+      #   run: |
+      #     docker save -o  api.tar  api:latest
+      #     chmod 664  api.tar
 
-      - name: Transfer Docker image to remote server
-        uses: appleboy/scp-action@master
-        with:
-          host: 5.35.84.206
-          username: root
-          port: 22
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source:  api.tar
-          target: ./images
+      # - name: Transfer Docker image to remote server
+      #   uses: appleboy/scp-action@master
+      #   with:
+      #     host: 5.35.84.206
+      #     username: root
+      #     port: 22
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     source:  api.tar
+      #     target: ./images
 
-      - name: Load Docker image on remote server
-        run: |
-          ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no root@5.35.84.206 << 'ENDSSH'
-          docker load -i ~/images/api.tar
-          ENDSSH
+      # - name: Load Docker image on remote server
+      #   run: |
+      #     ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no root@5.35.84.206 << 'ENDSSH'
+      #     docker load -i ~/images/api.tar
+      #     ENDSSH
 
       - name: Transfer Docker Compose file to remote server
         uses: appleboy/scp-action@master
@@ -53,13 +53,13 @@ jobs:
           username: root
           port: 22
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: docker-compose.yaml,.env
+          source: "docker-compose.yaml,.env"
           target: ./api
       
-      - name: Deploy Docker conitainers using Docker Compose on remote server
-        run: |
-          ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no root@5.35.84.206 << 'ENDSSH'
-          docker compose -f ~/api/docker-compose.yaml --env-file ~/api/.env up -d
-          ENDSSH
+      # - name: Deploy Docker conitainers using Docker Compose on remote server
+      #   run: |
+      #     ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no root@5.35.84.206 << 'ENDSSH'
+      #     docker compose -f ~/api/docker-compose.yaml --env-file ~/api/.env up -d
+      #     ENDSSH
               
 
