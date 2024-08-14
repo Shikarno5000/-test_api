@@ -53,13 +53,13 @@ jobs:
           username: root
           port: 22
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: docker-compose.yaml
+          source: docker-compose.yaml,.env
           target: ./api
       
       - name: Deploy Docker conitainers using Docker Compose on remote server
         run: |
           ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no root@5.35.84.206 << 'ENDSSH'
-          docker compose -f ~/api/docker-compose.yaml up -d
+          docker compose -f ~/api/docker-compose.yaml --env-file ~/api/.env up -d
           ENDSSH
               
 
