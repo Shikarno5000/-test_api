@@ -9,7 +9,7 @@ services:
     image: api:latest
     # build:
     #   context: ../
-    #   dockerfile: ./deploy/Dockerfile
+    #   dockerfile: ./api/Dockerfile
     # При необходимости выделите столько томов, сколько нужно.
     volumes:
       - ../storage/app:/var/www/html/storage/app
