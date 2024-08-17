@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    echo "123";
+    echo "Версия апи 1";
     return view('welcome');
 });
 
