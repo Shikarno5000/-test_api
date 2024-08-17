@@ -74,12 +74,12 @@ RUN apk add --no-cache \
 
 # Копирование файлов с этапа сборки
 COPY --from=build /var/www/html /var/www/html
-COPY ./nginx.conf /etc/nginx/http.d/default.conf
-COPY ./php.ini "$PHP_INI_DIR/conf.d/app.ini"
+COPY ./deploy/nginx/nginx.conf /etc/nginx/http.d/default.conf
+COPY ./deploy/php.ini "$PHP_INI_DIR/conf.d/app.ini"
 
 WORKDIR /var/www/html
 
-# Добавление всех папок, в которых хранятся файлы, требующие постоянного хранения, если необходимо. В противном случае удалите эту строку.
+# Добавление всех папок, в которых хранятся файлы, требующие постоянного хранения
 VOLUME ["/var/www/html/storage/app"]
 
 CMD ["sh", "-c", "nginx && php-fpm"]

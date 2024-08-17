@@ -1,16 +1,8 @@
-# deploy/docker-compose.yml
-
-version: '3.8'
-
 services:
   laravel:
     restart: unless-stopped
     container_name: laravelapp
     image: api:latest
-    # build:
-    #   context: ../
-    #   dockerfile: ./api/Dockerfile
-    # При необходимости выделите столько томов, сколько нужно.
     volumes:
       - ../storage/app:/var/www/html/storage/app
     environment:
@@ -36,3 +28,4 @@ services:
       MAIL_FROM_NAME: ${MAIL_FROM_NAME}
     ports:
       - "8080:80"
+      - "443:443"
