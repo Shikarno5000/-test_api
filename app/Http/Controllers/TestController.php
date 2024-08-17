@@ -2,64 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Project;
+use Illuminate\Support\Facades\Validator;
 
 class TestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return Test::all();
-    }
+  protected $model;
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+  public function __construct(Project $model)
+  {
+    $this->model = $model;
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function index()
+  {
+    return $this->goodResponse($this->model::with(['status', 'totalEntranceAndExpenditure','directions', 'contract'])->get());
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Test $test)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Test $test)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Test $test)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Test $test)
-    {
-        //
-    }
 }
